@@ -63,7 +63,7 @@ enum SourceOutputType {
     SOURCE_OUTPUT_VIRTUAL
 };
 
-enum SourceType{
+enum SourceType {
     SOURCE_ALL,
     SOURCE_NO_MONITOR,
     SOURCE_HARDWARE,
@@ -164,10 +164,12 @@ public:
     bool can_decibel;
 
     Gtk::CheckMenuItem defaultMenuItem;
+    Gtk::MenuItem equalizationMenuItem;
 
     virtual void onMuteToggleButton();
     virtual void executeVolumeUpdate();
     virtual void onDefaultToggle();
+    virtual void onEqualizationActivate();
 };
 
 class SourceWidget : public StreamWidget {
@@ -435,6 +437,7 @@ void ChannelWidget::set_sensitive(bool enabled) {
 }
 
 /*** MinimalStreamWidget ***/
+
 MinimalStreamWidget::MinimalStreamWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     Gtk::VBox(cobject),
     peakProgressBar(),
@@ -606,15 +609,22 @@ bool StreamWidget::timeoutEvent() {
 void StreamWidget::executeVolumeUpdate() {
 }
 
+/*** SinkWidget ***/
+
 SinkWidget::SinkWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     StreamWidget(cobject, x),
-    defaultMenuItem("_Default", true){
+    defaultMenuItem("_Default", true),
+    equalizationMenuItem("_Equalization...", true) {
 
     add_events(Gdk::BUTTON_PRESS_MASK);
 
     defaultMenuItem.set_active(false);
     defaultMenuItem.signal_toggled().connect(sigc::mem_fun(*this, &SinkWidget::onDefaultToggle));
+    
+    equalizationMenuItem.signal_activate().connect(sigc::mem_fun(*this, &SinkWidget::onEqualizationActivate));
+    
     menu.append(defaultMenuItem);
+    menu.append(equalizationMenuItem);
     menu.show_all();
 }
 
@@ -663,6 +673,12 @@ void SinkWidget::onDefaultToggle() {
     }
     pa_operation_unref(o);
 }
+
+void SinkWidget::onEqualizationActivate() {
+    g_message("Equalization controlling is not implemented yet.");
+}
+
+/*** SourceWidget ***/
 
 SourceWidget::SourceWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     StreamWidget(cobject, x),
@@ -721,6 +737,8 @@ void SourceWidget::onDefaultToggle() {
     }
     pa_operation_unref(o);
 }
+
+/*** SinkInputWidget ***/
 
 SinkInputWidget::SinkInputWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     StreamWidget(cobject, x),
@@ -825,6 +843,8 @@ void SinkInputWidget::SinkMenuItem::onToggle() {
     pa_operation_unref(o);
 }
 
+/*** SourceOutputWidget ***/
+
 SourceOutputWidget::SourceOutputWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     MinimalStreamWidget(cobject, x),
     mainWindow(NULL),
@@ -901,6 +921,8 @@ void SourceOutputWidget::SourceMenuItem::onToggle() {
 
     pa_operation_unref(o);
 }
+
+/*** RoleWidget ***/
 
 RoleWidget::RoleWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     StreamWidget(cobject, x) {
