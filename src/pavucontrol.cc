@@ -22,6 +22,8 @@
 #include <config.h>
 #endif
 
+#include <memory>
+
 #include <signal.h>
 #include <string.h>
 
@@ -72,6 +74,7 @@ enum SourceType {
 };
 
 class StreamWidget;
+class SinkWidget;
 class MainWindow;
 
 class ChannelWidget : public Gtk::EventBox {
@@ -152,6 +155,21 @@ public:
     virtual void executeVolumeUpdate();
 };
 
+class EqualizerWindow : public Gtk::Window {
+public:
+    EqualizerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x);
+    static EqualizerWindow* create(SinkWidget& owner);
+
+    void setSinkDescription(const Glib::ustring& description);
+
+protected:
+    virtual void onCloseClicked();
+
+private:
+    SinkWidget* owner;
+    Gtk::Button* closeButton;
+};
+
 class SinkWidget : public StreamWidget {
 public:
     SinkWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x);
@@ -165,6 +183,8 @@ public:
 
     Gtk::CheckMenuItem defaultMenuItem;
     Gtk::MenuItem equalizationMenuItem;
+
+    std::auto_ptr<EqualizerWindow> equalizerWindow;
 
     virtual void onMuteToggleButton();
     virtual void executeVolumeUpdate();
@@ -609,20 +629,49 @@ bool StreamWidget::timeoutEvent() {
 void StreamWidget::executeVolumeUpdate() {
 }
 
+/*** EqualizerWindow ***/
+
+EqualizerWindow::EqualizerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
+    Gtk::Window(cobject),
+    owner(NULL),
+    closeButton(NULL) {
+
+    x->get_widget("closeButton", closeButton);
+
+    closeButton->signal_clicked().connect(sigc::mem_fun(*this, &EqualizerWindow::onCloseClicked));
+}
+
+EqualizerWindow* EqualizerWindow::create(SinkWidget& owner) {
+    EqualizerWindow* w;
+    Glib::RefPtr<Gnome::Glade::Xml> x = Gnome::Glade::Xml::create(GLADE_FILE, "equalizerWindow");
+    x->get_widget_derived("equalizerWindow", w);
+    w->owner = &owner;
+    return w;
+}
+
+void EqualizerWindow::setSinkDescription(const Glib::ustring& description) {
+    set_title("Equalizer for " + description);
+}
+
+void EqualizerWindow::onCloseClicked() {
+    hide();
+}
+
 /*** SinkWidget ***/
 
 SinkWidget::SinkWidget(BaseObjectType* cobject, const Glib::RefPtr<Gnome::Glade::Xml>& x) :
     StreamWidget(cobject, x),
     defaultMenuItem("_Default", true),
-    equalizationMenuItem("_Equalization...", true) {
+    equalizationMenuItem("_Equalization...", true),
+    equalizerWindow(NULL) {
 
     add_events(Gdk::BUTTON_PRESS_MASK);
 
     defaultMenuItem.set_active(false);
     defaultMenuItem.signal_toggled().connect(sigc::mem_fun(*this, &SinkWidget::onDefaultToggle));
-    
+
     equalizationMenuItem.signal_activate().connect(sigc::mem_fun(*this, &SinkWidget::onEqualizationActivate));
-    
+
     menu.append(defaultMenuItem);
     menu.append(equalizationMenuItem);
     menu.show_all();
@@ -632,6 +681,7 @@ SinkWidget* SinkWidget::create() {
     SinkWidget* w;
     Glib::RefPtr<Gnome::Glade::Xml> x = Gnome::Glade::Xml::create(GLADE_FILE, "streamWidget");
     x->get_widget_derived("streamWidget", w);
+    w->equalizerWindow.reset(EqualizerWindow::create(*w));
     return w;
 }
 
@@ -675,7 +725,7 @@ void SinkWidget::onDefaultToggle() {
 }
 
 void SinkWidget::onEqualizationActivate() {
-    g_message("Equalization controlling is not implemented yet.");
+    equalizerWindow->present();
 }
 
 /*** SourceWidget ***/
@@ -1065,6 +1115,8 @@ void MainWindow::updateSink(const pa_sink_info &info) {
 
     if (is_new)
         updateDeviceVisibility();
+
+    w->equalizerWindow->setSinkDescription(w->description);
 }
 
 static void suspended_callback(pa_stream *s, void *userdata) {
