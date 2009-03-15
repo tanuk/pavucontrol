@@ -2,6 +2,8 @@
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
 <!--*- mode: xml -*-->
 <glade-interface>
+  <!-- interface-requires gtk+ 2.16 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkWindow" id="mainWindow">
     <property name="title" translatable="yes">Volume Control</property>
     <property name="default_width">500</property>
@@ -25,12 +27,12 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">12</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <widget class="GtkViewport" id="viewport1">
                         <property name="visible">True</property>
-                        <property name="shadow_type">GTK_SHADOW_NONE</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="streamsVBox">
                             <property name="visible">True</property>
@@ -43,12 +45,18 @@
                                 <property name="label" translatable="yes">&lt;i&gt;No application is currently playing audio.&lt;/i&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
                             </child>
                           </widget>
                         </child>
                       </widget>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkAlignment" id="alignment3">
@@ -68,6 +76,9 @@
                             <property name="use_markup">True</property>
                             <property name="use_underline">True</property>
                           </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkComboBox" id="sinkInputTypeComboBox">
@@ -99,8 +110,8 @@ Virtual Streams</property>
                 <property name="use_underline">True</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -111,12 +122,12 @@ Virtual Streams</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">12</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <widget class="GtkViewport" id="viewport5">
                         <property name="visible">True</property>
-                        <property name="shadow_type">GTK_SHADOW_NONE</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="recsVBox">
                             <property name="visible">True</property>
@@ -129,12 +140,18 @@ Virtual Streams</property>
                                 <property name="label" translatable="yes">&lt;i&gt;No application is currently recording audio.&lt;/i&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
                             </child>
                           </widget>
                         </child>
                       </widget>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkAlignment" id="alignment9">
@@ -154,6 +171,9 @@ Virtual Streams</property>
                             <property name="use_markup">True</property>
                             <property name="use_underline">True</property>
                           </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkComboBox" id="sourceOutputTypeComboBox">
@@ -188,9 +208,9 @@ Virtual Streams</property>
                 <property name="use_underline">True</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">1</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -201,12 +221,12 @@ Virtual Streams</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">12</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <widget class="GtkViewport" id="viewport4">
                         <property name="visible">True</property>
-                        <property name="shadow_type">GTK_SHADOW_NONE</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="sinksVBox">
                             <property name="visible">True</property>
@@ -219,12 +239,18 @@ Virtual Streams</property>
                                 <property name="label" translatable="yes">&lt;i&gt;No output devices available&lt;/i&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
                             </child>
                           </widget>
                         </child>
                       </widget>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkAlignment" id="alignment1">
@@ -245,6 +271,9 @@ Virtual Streams</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">sinkTypeComboBox</property>
                           </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkComboBox" id="sinkTypeComboBox">
@@ -278,9 +307,9 @@ Virtual Output Devices</property>
                 <property name="use_underline">True</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">2</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -291,12 +320,13 @@ Virtual Output Devices</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">12</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <widget class="GtkViewport" id="viewport3">
                         <property name="visible">True</property>
-                        <property name="shadow_type">GTK_SHADOW_NONE</property>
+                        <property name="resize_mode">queue</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="sourcesVBox">
                             <property name="visible">True</property>
@@ -309,12 +339,18 @@ Virtual Output Devices</property>
                                 <property name="label" translatable="yes">&lt;i&gt;No input devices available&lt;/i&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
                             </child>
                           </widget>
                         </child>
                       </widget>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkAlignment" id="alignment2">
@@ -335,6 +371,9 @@ Virtual Output Devices</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">sourceTypeComboBox</property>
                           </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkComboBox" id="sourceTypeComboBox">
@@ -370,12 +409,71 @@ Monitors</property>
                 <property name="use_underline">True</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">3</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkVBox" id="vbox1">
+                <property name="visible">True</property>
+                <child>
+                  <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="border_width">12</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <child>
+                      <widget class="GtkViewport" id="viewport2">
+                        <property name="visible">True</property>
+                        <property name="shadow_type">none</property>
+                        <child>
+                          <widget class="GtkVBox" id="cardsVBox">
+                            <property name="visible">True</property>
+                            <child>
+                              <widget class="GtkLabel" id="noCardsLabel">
+                                <property name="visible">True</property>
+                                <property name="sensitive">False</property>
+                                <property name="xpad">16</property>
+                                <property name="ypad">16</property>
+                                <property name="label" translatable="yes">&lt;i&gt;No cards available for configuration&lt;/i&gt;</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label5">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">_Configuration</property>
+                <property name="use_underline">True</property>
+              </widget>
+              <packing>
+                <property name="position">4</property>
+                <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
           </widget>
+          <packing>
+            <property name="position">0</property>
+          </packing>
         </child>
       </widget>
     </child>
@@ -402,9 +500,11 @@ Monitors</property>
                       <widget class="GtkImage" id="iconImage">
                         <property name="visible">True</property>
                         <property name="stock">gtk-missing-image</property>
+                        <property name="icon-size">4</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
@@ -417,6 +517,7 @@ Monitors</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
@@ -425,7 +526,7 @@ Monitors</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Stream Title</property>
                             <property name="use_markup">True</property>
-                            <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                            <property name="ellipsize">middle</property>
                           </widget>
                           <packing>
                             <property name="position">1</property>
@@ -444,35 +545,36 @@ Monitors</property>
                           <widget class="GtkToggleButton" id="muteToggleButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
                             <property name="tooltip" translatable="yes">Mute audio</property>
-                            <property name="relief">GTK_RELIEF_NONE</property>
-                            <property name="response_id">0</property>
+                            <property name="relief">none</property>
                             <child>
                               <widget class="GtkImage" id="image20">
                                 <property name="visible">True</property>
-                                <property name="icon_size">1</property>
                                 <property name="icon_name">audio-volume-muted</property>
+                                <property name="icon-size">1</property>
                               </widget>
                             </child>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
                           <widget class="GtkToggleButton" id="lockToggleButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
                             <property name="tooltip" translatable="yes">Lock channels together</property>
-                            <property name="relief">GTK_RELIEF_NONE</property>
-                            <property name="response_id">0</property>
+                            <property name="relief">none</property>
                             <property name="active">True</property>
                             <child>
                               <widget class="GtkImage" id="image18">
                                 <property name="visible">True</property>
-                                <property name="icon_size">1</property>
                                 <property name="icon_name">stock_lock</property>
+                                <property name="icon-size">1</property>
                               </widget>
                             </child>
                           </widget>
@@ -486,13 +588,13 @@ Monitors</property>
                           <widget class="GtkToggleButton" id="streamToggle">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
                             <property name="tooltip" translatable="yes">Open menu</property>
-                            <property name="relief">GTK_RELIEF_NONE</property>
-                            <property name="response_id">0</property>
+                            <property name="relief">none</property>
                             <child>
                               <widget class="GtkArrow" id="arrow3">
                                 <property name="visible">True</property>
-                                <property name="arrow_type">GTK_ARROW_DOWN</property>
+                                <property name="arrow_type">down</property>
                               </widget>
                             </child>
                           </widget>
@@ -512,6 +614,7 @@ Monitors</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -535,6 +638,7 @@ Monitors</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -570,6 +674,7 @@ Monitors</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -619,34 +724,37 @@ Monitors</property>
                     <property name="visible">True</property>
                     <property name="spacing">6</property>
                     <child>
-                      <widget class="GtkImage" id="iconImage1">
+                      <widget class="GtkImage" id="iconImage">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="stock">gtk-missing-image</property>
+                        <property name="icon-size">4</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <widget class="GtkHBox" id="hbox11">
                         <property name="visible">True</property>
                         <child>
-                          <widget class="GtkLabel" id="boldNameLabel1">
+                          <widget class="GtkLabel" id="boldNameLabel">
                             <property name="visible">True</property>
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="nameLabel1">
+                          <widget class="GtkLabel" id="nameLabel">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Stream Title</property>
                             <property name="use_markup">True</property>
-                            <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                            <property name="ellipsize">middle</property>
                           </widget>
                           <packing>
                             <property name="position">1</property>
@@ -658,15 +766,15 @@ Monitors</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkToggleButton" id="streamToggle1">
+                      <widget class="GtkToggleButton" id="streamToggle">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="relief">GTK_RELIEF_NONE</property>
-                        <property name="response_id">0</property>
+                        <property name="receives_default">False</property>
+                        <property name="relief">none</property>
                         <child>
                           <widget class="GtkArrow" id="arrow1">
                             <property name="visible">True</property>
-                            <property name="arrow_type">GTK_ARROW_DOWN</property>
+                            <property name="arrow_type">down</property>
                           </widget>
                         </child>
                       </widget>
@@ -679,12 +787,14 @@ Monitors</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
               </widget>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -1088,6 +1198,115 @@ Monitors</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="position">3</property>
+              </packing>
+            </child>
+          </widget>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="GtkWindow" id="cardWindow">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">window1</property>
+    <child>
+      <widget class="GtkEventBox" id="cardWidget">
+        <property name="visible">True</property>
+        <child>
+          <widget class="GtkVBox" id="cardWidget1">
+            <property name="visible">True</property>
+            <child>
+              <widget class="GtkVBox" id="vbox7">
+                <property name="visible">True</property>
+                <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <widget class="GtkHBox" id="hbox9">
+                    <property name="visible">True</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <widget class="GtkImage" id="iconImage">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="stock">gtk-missing-image</property>
+                        <property name="icon-size">4</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkHBox" id="hbox11">
+                        <property name="visible">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="nameLabel">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Card Name</property>
+                            <property name="use_markup">True</property>
+                            <property name="ellipsize">middle</property>
+                          </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkHBox" id="hbox1">
+                    <property name="visible">True</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <widget class="GtkLabel" id="label1">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">&lt;b&gt;Profile:&lt;/b&gt;</property>
+                        <property name="use_markup">True</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkComboBox" id="profileList">
+                        <property name="visible">True</property>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkHSeparator" id="hseparator5">
+                <property name="visible">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>
