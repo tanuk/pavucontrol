@@ -24,7 +24,20 @@ glade_DATA=pavucontrol.glade
 desktop_in_files=pavucontrol.desktop.in
 desktop_DATA=$(desktop_in_files:.desktop.in=.desktop)
 
-pavucontrol_SOURCES=pavucontrol.cc i18n.h
+pavucontrol_SOURCES= \
+  minimalstreamwidget.h minimalstreamwidget.cc \
+  channelwidget.h channelwidget.cc \
+  streamwidget.h streamwidget.cc \
+  cardwidget.h cardwidget.cc \
+  sinkwidget.h sinkwidget.cc \
+  sourcewidget.h sourcewidget.cc \
+  sinkinputwidget.h sinkinputwidget.cc \
+  sourceoutputwidget.h sourceoutputwidget.cc \
+  rolewidget.h rolewidget.cc \
+  equalizerwindow.h equalizerwindow.cc \
+  mainwindow.h mainwindow.cc \
+  pavucontrol.h pavucontrol.cc \
+  i18n.h
 
 pavucontrol_LDADD=$(AM_LDADD) $(GUILIBS_LIBS) $(PULSE_LIBS)
 pavucontrol_CXXFLAGS=$(AM_CXXFLAGS) $(GUILIBS_CFLAGS) $(PULSE_CFLAGS) -DLOCALEDIR=\"$(localedir)\"
